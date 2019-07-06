@@ -1,5 +1,5 @@
 # A report!
-class Report
+class Memerator::Report
   # @!visibility private
   def initialize(data)
     @data = data

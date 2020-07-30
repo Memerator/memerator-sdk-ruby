@@ -1,3 +1,4 @@
 memerator-*.gem
 .yardoc
 doc
+.idea/

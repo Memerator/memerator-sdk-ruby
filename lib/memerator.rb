@@ -36,13 +36,15 @@ class Memerator
   end
 
   # @param amount [Integer] how many memes you want to get. max 25
+  # @param offset [Integer] how many memes you want to offset, starts at that index and gets amount memes after
   # @return [Array<Meme>] recent amount of memes
   # @raise [ArgumentError] if amount is not between 1 and 25
-  def recent_memes(amount = 5)
+  def recent_memes(amount = 5, offset = 0)
     amount = amount.to_i
-    raise ArgumentError, "Please enter a valid amount between 1 and 25" unless amount.between?(1, 25)
+    offset = offset.to_i
+    raise ArgumentError, 'Please enter a valid amount between 1 and 25' unless amount.between?(1, 25)
 
-    memes = JSON.parse(RestClient.get("https://api.memerator.me/v1/meme/recents?amount=#{amount}", Authorization: @token))
+    memes = JSON.parse(RestClient.get("https://api.memerator.me/v1/meme/recents?amount=#{amount}&offset=#{offset}", Authorization: @token))
     memes.map { |meme_data| Meme.new(meme_data) }
   end
 
@@ -61,7 +63,7 @@ class Memerator
   # Get a random meme
   # @return [Meme] the meme
   def randommeme
-    data = JSON.parse(RestClient.get("https://api.memerator.me/v1/meme/random", Authorization: @token))
+    data = JSON.parse(RestClient.get('https://api.memerator.me/v1/meme/random', Authorization: @token))
     Meme.new(data, token: @token)
   end
 

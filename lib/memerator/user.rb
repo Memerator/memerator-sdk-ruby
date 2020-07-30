@@ -55,6 +55,16 @@ class Memerator::User
     @data['perks']['pro']
   end
 
+  # @return [true, false] the user's service status
+  def service?
+    @data['perks']['service']
+  end
+
+  # @return [true, false] the user's founder status
+  def founder?
+    @data['perks']['founder']
+  end
+
   # @return [String] the user's profile link
   def link
     @data['permalink']

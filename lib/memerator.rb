@@ -62,7 +62,7 @@ class Memerator
 
   # Get a random meme
   # @return [Meme] the meme
-  def randommeme
+  def random_meme
     data = JSON.parse(RestClient.get('https://api.memerator.me/v1/meme/random', Authorization: @token))
     Meme.new(data, token: @token)
   end
